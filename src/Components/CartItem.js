@@ -1,9 +1,36 @@
 import { AddRounded, RemoveRounded } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { actionType } from "./reducer";
+import { useStateValue } from "./StateProvider";
+let cartItems = [];
 
-function CartItems({ price, name, imgSrc ,itemId}) {
+function CartItem({ price, name, imgSrc ,itemId}) {
 
   const [qty , setQty] = useState(1);
+  const [{ cart }, dispatch] = useStateValue();
+  const [itemPrice , setItemPrice] = useState(parseInt(qty)*parseFloat(price));
+
+  useEffect( () => {
+    cartItems = cart;
+    setItemPrice(parseInt(qty)*parseFloat(price));
+  } ,[qty]);
+
+  const updateQuantity = (action, id) => {
+    if(action === 'add'){
+      setQty(qty + 1)
+    }else{
+      if(qty == 1){
+cartItems.pop(id);
+dispatch({
+  type:actionType.SET_CART,
+          cart : cartItems,
+})
+      }
+      
+      setQty(qty - 1)
+    }
+
+  }
 
 
   return (
@@ -16,18 +43,18 @@ function CartItems({ price, name, imgSrc ,itemId}) {
         <div className="itemQuantity">
           <span>x {qty}</span>
           <div className="quantity">
-            <RemoveRounded className="removeItem" />
+            <RemoveRounded className="removeItem" onClick={() => updateQuantity('remove',itemId) } />
 
-            <AddRounded className="addItem" /> 
+            <AddRounded className="addItem" onClick={() => updateQuantity('add',itemId) } /> 
           </div>
         </div>
       </div>
       <p className="itemPrice">
         <span ClassName="RupeesSign">₹ </span>
-        <span className="itemPriceValue">{price}</span>
+        <span className="itemPriceValue">{itemPrice}</span>
       </p>
     </div>
   );
 }
 
-export default CartItems;
+export default CartItem;

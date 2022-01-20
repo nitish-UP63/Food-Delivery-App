@@ -899,3 +899,72 @@ color: #f8901c;
 
 }
 
+@media screen and (min-width : 650px) {
+  .rowContainer{
+    justify-content: space-between;
+  }
+  .inputBox{
+    width: 60%;
+  }
+  
+}
+
+@media screen and (min-width : 950px) {
+  .toggleMenu{
+    display: none;
+  }
+
+  .profileContainer .userName{
+    display: block;
+  }
+  .bottomMenu{
+    left: 21%;
+    width: 40%;
+  }
+  .mainContainer{
+    width: calc(100% - 350px);
+    padding: 10px 30px;
+  }
+
+  .Banner{
+    height: 160px;
+  }
+
+  .deliveryPic{
+    width: 230px;
+    height: 180px;
+    bottom:-13px;
+  }
+
+  .bannerContent h3{
+    font-size: 24px;
+  }
+  .bannerContent p{
+    font-size: 15px;
+    margin: 12px 0;
+    width: unset;
+  }
+
+  .bannerContent a{
+    font-size: 16px;
+  }
+
+  main{
+    display: flex;
+  }
+
+  .rightMenu{
+    position: fixed;
+    z-index: 1;
+    transform: translateX(0%);
+    top:unset;
+    padding: 20px 15px;
+  }
+
+  .itemCard{
+    width: 180px;
+    height: 200px;
+  }
+
+
+}
